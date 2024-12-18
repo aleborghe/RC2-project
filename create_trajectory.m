@@ -7,10 +7,16 @@ y_start = 60;
 
 % Generate NASCAR Circuit
 [x_waypoint, y_waypoint] = nascar_circuit(a, b, num_points, x_start, y_start);
-num_points = size(x_waypoint, 1);
+num_points = size(x_waypoint, 2);
 % Waypoints
 T = linspace(0, 10, num_points); % Seconds
 fine_t = linspace(0, 10, num_points*10);
+
+%Parking lot
+parkX = 290;  % x-coordinate of the lower-left corner
+parkY = 80;  % y-coordinate of the lower-left corner
+width = 60;  % Width of the rectangle
+height = 30; % Height of the rectangle
 
 % Interpolation
 x_t = spline(T, x_waypoint, fine_t);             % Interpolate x(t)

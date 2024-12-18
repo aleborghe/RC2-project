@@ -32,8 +32,8 @@ local_vertices = [
        -base_width,  base_width/2       % Back-right
     ];
 global_vertices = local_vertices;
-global_vertices(:, 1) = global_vertices(:, 1) + x(i);
-global_vertices(:, 2) = global_vertices(:, 2) + y(i);
+global_vertices(:, 1) = global_vertices(:, 1) + x(1);
+global_vertices(:, 2) = global_vertices(:, 2) + y(1);
 unicycle = fill(global_vertices(:, 1), global_vertices(:, 2), 'r', 'EdgeColor', 'k');
 
 % Animation loop
