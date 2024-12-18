@@ -1,9 +1,3 @@
-% Load and display background image
-bg = imread('background.jpg');
-figure;
-imshow(bg);
-hold on;
-
 % Circuit Parameters
 a = 365;       % Length of straight sections
 b = 130;       % Width of straight sections
@@ -13,21 +7,14 @@ y_start = 60;
 
 % Generate NASCAR Circuit
 [x_waypoint, y_waypoint] = nascar_circuit(a, b, num_points, x_start, y_start);
-
+num_points = size(x_waypoint, 1);
 % Waypoints
-T = linspace(0, 10, num_points+1); % Seconds
-fine_t = linspace(0, 10, (num_points+1)*10);
+T = linspace(0, 10, num_points); % Seconds
+fine_t = linspace(0, 10, num_points*10);
 
 % Interpolation
 x_t = spline(T, x_waypoint, fine_t);             % Interpolate x(t)
 y_t = spline(T, y_waypoint, fine_t);             % Interpolate y(t)
-
-% Plot
-plot(x_t, y_t, 'b-');
-xlabel('x(t)');
-ylabel('y(t)');
-title('Smooth Continuous Path');
-legend('Interpolated Path');
 
 %compute velocity
 dt = mean(diff(fine_t));
