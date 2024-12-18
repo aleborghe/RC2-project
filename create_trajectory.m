@@ -39,10 +39,12 @@ t_velocity = fine_t(1:end-1);
 
 theta_ref = atan2(v_y, v_x);
 
-
+v = sqrt(v_x.^2 + v_y.^2);
 data = [x_t(1:end-1); y_t(1:end-1); theta_ref]'; % Transponiamo per avere [N, 3]
 time = t_velocity'; % Il tempo deve essere una colonna
 
 % Creiamo una timeseries con le dimensioni appropriate
 ref_data = timeseries(data, time);
 ref_data.Name = 'ReferenceData';  % Nome opzionale per la variabile
+v_input = timeseries(v, time);
+v_input.Name = 'V-input';  % Nome opzionale per la variabile

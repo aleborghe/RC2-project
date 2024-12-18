@@ -35,23 +35,23 @@ global_vertices = local_vertices;
 global_vertices(:, 1) = global_vertices(:, 1) + x(1);
 global_vertices(:, 2) = global_vertices(:, 2) + y(1);
 unicycle = fill(global_vertices(:, 1), global_vertices(:, 2), 'r', 'EdgeColor', 'k');
-
-% Animation loop
-for i = 1:size(x,1)
-     % Rotation matrix for orientation
-    R = [cos(theta(i)), -sin(theta(i)); sin(theta(i)), cos(theta(i))];
-    
-    % Rotate and translate the triangle
-    global_vertices = (R * local_vertices')';
-    global_vertices(:, 1) = global_vertices(:, 1) + x(i);
-    global_vertices(:, 2) = global_vertices(:, 2) + y(i);
-    
-    % Draw the triangle
-    set(unicycle, 'X', global_vertices(:, 1), 'Y', global_vertices(:, 2))
-    % Update unicycle position and orientation
-    
-    drawnow;
-    pause(dt); % Adjust for real-time animation
+while true
+    % Animation loop
+    for i = 1:size(x,1)
+         % Rotation matrix for orientation
+        R = [cos(theta(i)), -sin(theta(i)); sin(theta(i)), cos(theta(i))];
+        
+        % Rotate and translate the triangle
+        global_vertices = (R * local_vertices')';
+        global_vertices(:, 1) = global_vertices(:, 1) + x(i);
+        global_vertices(:, 2) = global_vertices(:, 2) + y(i);
+        
+        % Draw the triangle
+        set(unicycle, 'X', global_vertices(:, 1), 'Y', global_vertices(:, 2))
+        % Update unicycle position and orientation
+        
+        drawnow;
+        pause(dt); % Adjust for real-time animation
+    end
 end
-
 hold off;
