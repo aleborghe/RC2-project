@@ -16,8 +16,8 @@ function [x, y] = nascar_circuit(a, b, num_points, x_start, y_start)
     end
     
     % Number of points for each section
-    n_straight = floor(num_points / 4); % Points per straight segment
-    n_curve = floor(num_points / 4);   % Points per curved segment
+    n_straight = floor(num_points*0.3); % Points per straight segment
+    n_curve = floor(num_points*0.2);   % Points per curved segment
     
     % Curve angles for the arcs
     theta1 = linspace(5*pi/2, 3*pi/2, n_curve);         % Bottom-left curve

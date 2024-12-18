@@ -12,26 +12,44 @@ x_start = 125;
 y_start = 60;
 
 % Generate NASCAR Circuit
-[x, y] = nascar_circuit(a, b, num_points, x_start, y_start);
-
-%Plot parking lot
-parkX = 290;  % x-coordinate of the lower-left corner
-parkY = 80;  % y-coordinate of the lower-left corner
-width = 60;  % Width of the rectangle
-height = 30; % Height of the rectangle
-rectangle('Position', [parkX, parkY, width, height], 'FaceColor', 'blue', 'EdgeColor', 'black');
+[x_waypoint, y_waypoint] = nascar_circuit(a, b, num_points, x_start, y_start);
 
 % Waypoints
-T = 0:num_points; % Example time values
-fine_t = linspace(0, num_points, (num_points+1)*10);
+T = linspace(0, 10, num_points+1); % Seconds
+fine_t = linspace(0, 10, (num_points+1)*10);
 
 % Interpolation
-x_t = spline(T, x, fine_t);             % Interpolate x(t)
-y_t = spline(T, y, fine_t);             % Interpolate y(t)
+x_t = spline(T, x_waypoint, fine_t);             % Interpolate x(t)
+y_t = spline(T, y_waypoint, fine_t);             % Interpolate y(t)
 
 % Plot
-plot(x_t, y_t, 'b-', x, y, 'ro');
+plot(x_t, y_t, 'b-');
 xlabel('x(t)');
 ylabel('y(t)');
 title('Smooth Continuous Path');
-legend('Interpolated Path', 'Waypoints');
+legend('Interpolated Path');
+
+%compute velocity
+dt = mean(diff(fine_t));
+v_x = diff(x_t) / dt;  
+v_y = diff(y_t) / dt;
+
+% Time vector for velocity (shorter by one point)
+t_velocity = fine_t(1:end-1);
+
+% figure
+% plot(t_velocity, v_x, 'r', t_velocity, v_y, 'b');
+% title('Velocity Components');
+% legend('v_x', 'v_y');
+% xlabel('Time (s)');
+% ylabel('Velocity');
+
+theta_ref = atan2(v_y, v_x);
+
+
+data = [x_t(1:end-1); y_t(1:end-1); theta_ref]'; % Transponiamo per avere [N, 3]
+time = t_velocity'; % Il tempo deve essere una colonna
+
+% Creiamo una timeseries con le dimensioni appropriate
+ref_data = timeseries(data, time);
+ref_data.Name = 'ReferenceData';  % Nome opzionale per la variabile
