@@ -5,4 +5,3 @@ TODO:
 4) overtaking
 5) pro version: obstacle is moving
 
-pls pls
