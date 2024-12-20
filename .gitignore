@@ -1,2 +1,17 @@
 # Ignore slprj folder (Simulink generated code)
 slprj/
+
+# Ignore MATLAB backups
+*.asv
+
+# Ignore temporary files
+*.tmp
+*.log
+
+# Ignore Simulink cache files
+*.slxc
+
+# Ignore user-specific settings
+*.mexw64
+*.mexmaci64
+*.mexa64
