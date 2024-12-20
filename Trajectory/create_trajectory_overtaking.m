@@ -11,7 +11,7 @@ num_points = size(x_waypoint, 2);
 
 % Waypoints
 T = linspace(0, 10, num_points); % Seconds
-fine_t = linspace(0, 10, num_points * 10);
+fine_t = linspace(0, 10, num_points * 100);
 
 % Second lane circuit (used for overtaking)
 x_start2 = x_start;
@@ -90,11 +90,11 @@ v_input.Name = 'V-input'; % Optional name
 % Function to handle obstacle avoidance
 function [new_x, new_y, overtaking_start_idx, overtaking_end_idx] = obstacle_avoidance_with_early_detection(x_t, y_t, x2_t, y2_t, obstacle_x, obstacle_y)
     % Parameters for early detection and avoidance
-    t = linspace(-7, 7, 300); % Adjust range for smoothness
+    t = linspace(-7, 7, 3000); % Adjust range for smoothness
     x1 = 1 ./ (1 + exp(-t));
     x2 = exp(-t) ./ (1 + exp(-t));
-    trapezoid = [x1, x1(end)*ones(1,200), x2];
-    detection_margin_x = 60; % Detection range in x-direction
+    trapezoid = [x1, x1(end)*ones(1,800), x2];
+    detection_margin_x = 80; % Detection range in x-direction
     detection_margin_y = 20; % Detection range in y-direction
     early_detection_distance = 50; % Distance ahead of obstacle to start overtaking
     size_trap = length(trapezoid); % Length of avoidance maneuver
