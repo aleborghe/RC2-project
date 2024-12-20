@@ -20,8 +20,8 @@ function [x, y] = nascar_circuit(a, b, num_points, x_start, y_start)
     n_curve = floor(num_points*0.2);   % Points per curved segment
     
     % Curve angles for the arcs
-    theta1 = linspace(5*pi/2, 3*pi/2, n_curve);         % Bottom-left curve
-    theta2 = linspace(3*pi/2, pi/2, n_curve);      % Top-right curve
+    theta1 = linspace(5*pi/2-0.01, 3*pi/2+0.01, n_curve);         % Bottom-left curve
+    theta2 = linspace(3*pi/2-0.01, pi/2+0.01, n_curve);      % Top-right curve
     
     % Parametrize the bottom-left curve (circle arc)
     x_curve1 = x_start+ a + b/2 * cos(theta1);

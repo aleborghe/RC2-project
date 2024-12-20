@@ -10,7 +10,7 @@ y_start = 60;
 num_points = size(x_waypoint, 2);
 % Waypoints
 T = linspace(0, 10, num_points); % Seconds
-fine_t = linspace(0, 10, num_points*10);
+fine_t = linspace(0, 10, num_points*100);
 
 % Second lane circuit
 x_start2 = x_start;
@@ -88,7 +88,7 @@ function [new_x, new_y] = obstacle_avoidance(x_t, y_t, x2_t, y2_t, length, start
     index = find(abs(x_t - start_x) < 0.2);
     index = index(1);
     size_trap = size(trapezoid, 2);
-    range = index:index+size_trap-1
+    range = index:index+size_trap-1;
     new_x = x_t;
     new_y = y_t;
     new_x(range) = new_x(range) + (x2_t(range) - x_t(range)).*trapezoid;

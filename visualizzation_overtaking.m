@@ -60,7 +60,7 @@ if ~isempty(overtaking_start_idx) && ~isempty(overtaking_end_idx)
 end
 
 % Animation loop
-for i = 1:size(x, 1)
+for i = 1:(size(x, 1)-1)
     % Rotation matrix for unicycle orientation
     R = [cos(theta(i)), -sin(theta(i)); sin(theta(i)), cos(theta(i))];
     
@@ -74,7 +74,7 @@ for i = 1:size(x, 1)
     
     % Real-time visualization of the unicycle path
     drawnow;
-    pause(40*dt); % Adjust to match real-time simulation
+    pause(dt); % Adjust to match real-time simulation
 end
 
 hold off;
