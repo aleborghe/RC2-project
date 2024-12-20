@@ -51,7 +51,7 @@ if ~isempty(overtaking_start_idx)
 end
 
 % Plot the obstacle (green circle)
-h_obstacle = plot(obstacle_x, obstacle_y, 'go', 'MarkerSize', 15, 'MarkerFaceColor', 'g'); 
+h_obstacle = plot(obstacle_x, obstacle_y, 'go', 'MarkerSize', 20, 'MarkerFaceColor', 'g'); 
 
 % Labels and legend
 xlabel('x(t)');
@@ -90,7 +90,10 @@ v_input.Name = 'V-input'; % Optional name
 % Function to handle obstacle avoidance
 function [new_x, new_y, overtaking_start_idx, overtaking_end_idx] = obstacle_avoidance_with_early_detection(x_t, y_t, x2_t, y2_t, obstacle_x, obstacle_y)
     % Parameters for early detection and avoidance
-    trapezoid = [linspace(0, 1, 100), ones(1, 300), linspace(1, 0, 100)];
+    t = linspace(-5, 5, 150); % Adjust range for smoothness
+    x1 = 1 ./ (1 + exp(-t));
+    x2 = exp(-t) ./ (1 + exp(-t));
+    trapezoid = [x1, x1(end)*ones(1,200), x2];
     detection_margin_x = 60; % Detection range in x-direction
     detection_margin_y = 20; % Detection range in y-direction
     early_detection_distance = 50; % Distance ahead of obstacle to start overtaking
