@@ -33,7 +33,7 @@ length = 300;
 
 obstacle_x = 250;
 obstacle_y = y_start;
-start_x = obstacle_x-60;
+start_x = obstacle_x-100;
 start_y = obstacle_y;
 
 [new_x, new_y] = obstacle_avoidance(x_t, y_t, x2_t, y2_t, length, start_x, start_y);
@@ -81,7 +81,10 @@ v_input = timeseries(v, time);
 v_input.Name = 'V-input';  % Nome opzionale per la variabile
 
 function [new_x, new_y] = obstacle_avoidance(x_t, y_t, x2_t, y2_t, length, start_x, start_y)
-    trapezoid = [linspace(0,1,100), ones(1,length), linspace(1,0,100)];
+    t = linspace(-5, 5, 300); % Adjust range for smoothness
+    x1 = 1 ./ (1 + exp(-t));
+    x2 = exp(-t) ./ (1 + exp(-t));
+    trapezoid = [x1, x1(end)*ones(1,length), x2];
     index = find(abs(x_t - start_x) < 0.2);
     index = index(1);
     size_trap = size(trapezoid, 2);
