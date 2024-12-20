@@ -69,6 +69,16 @@ end
 % Display the legend
 legend(legend_entries);
 % Compute velocity
+
+
+% Plot the parking lot (blue rectangle)
+parkX = 290;  
+parkY = 80;   
+width = 60;   
+height = 30;  
+rectangle('Position', [parkX, parkY, width, height], 'FaceColor', 'blue', 'EdgeColor', 'black');
+text(parkX + width/2, parkY + height/2, 'Parking Lot', 'Color', 'white', 'HorizontalAlignment', 'center');
+
 dt = mean(diff(fine_t));
 v_x = diff(new_x) / dt;
 v_y = diff(new_y) / dt;
@@ -89,6 +99,10 @@ ref_data = timeseries(data, time);
 ref_data.Name = 'ReferenceData'; % Optional name
 v_input = timeseries(v, time);
 v_input.Name = 'V-input'; % Optional name
+
+
+
+
 % Function to handle obstacle avoidance
 function [new_x, new_y, overtaking_start_idx, overtaking_end_idx] = obstacle_avoidance_with_early_detection(x_t, y_t, x2_t, y2_t, obstacle_x, obstacle_y)
     % Parameters for early detection and avoidance
@@ -134,4 +148,6 @@ function [new_x, new_y, overtaking_start_idx, overtaking_end_idx] = obstacle_avo
         end
     end
 end
+
+
 
