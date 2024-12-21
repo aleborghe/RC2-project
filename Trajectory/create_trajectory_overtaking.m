@@ -27,8 +27,8 @@ x2_t = spline(T, x_waypoint2, fine_t);           % Interpolate x(t) for overtaki
 y2_t = spline(T, y_waypoint2, fine_t);           % Interpolate y(t) for overtaking
 
 % Obstacle parameters
-obstacle_x = 300;
-obstacle_y = y_start;
+obstacle_x = 554;
+obstacle_y = 115;
 
 % Modify trajectory with obstacle avoidance
 [new_x, new_y, overtaking_start_idx, overtaking_end_idx] = obstacle_avoidance_with_early_detection(x_t, y_t, x2_t, y2_t, obstacle_x, obstacle_y);
@@ -111,7 +111,7 @@ function [new_x, new_y, overtaking_start_idx, overtaking_end_idx] = obstacle_avo
     x2 = exp(-t) ./ (1 + exp(-t));
     trapezoid = [x1, x1(end)*ones(1,800), x2];
     detection_margin_x = 80; % Detection range in x-direction
-    detection_margin_y = 20; % Detection range in y-direction
+    detection_margin_y = 50; % Detection range in y-direction
     early_detection_distance = 50; % Distance ahead of obstacle to start overtaking
     size_trap = length(trapezoid); % Length of avoidance maneuver
 
@@ -126,7 +126,7 @@ function [new_x, new_y, overtaking_start_idx, overtaking_end_idx] = obstacle_avo
 
     for i = 1:length(x_t)
         % Check if obstacle is within detection range and ahead of the obstacle
-        if abs(x_t(i) - obstacle_x) < detection_margin_x && abs(y_t(i) - obstacle_y) < detection_margin_y && x_t(i) < obstacle_x + early_detection_distance
+        if (abs(x_t(i) - obstacle_x) < detection_margin_x && abs(y_t(i) - obstacle_y) < detection_margin_y) && x_t(i) < obstacle_x + early_detection_distance
             % Perform overtaking (avoidance maneuver)
             overtaking_start_idx = i;
             range = i:(i + size_trap - 1);
