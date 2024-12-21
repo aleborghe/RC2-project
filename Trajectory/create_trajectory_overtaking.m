@@ -100,8 +100,8 @@ ref_data.Name = 'ReferenceData'; % Optional name
 v_input = timeseries(v, time);
 v_input.Name = 'V-input'; % Optional name
 
-
-
+% Save to the root folder
+save('../ref_data.mat', 'ref_data');
 
 % Function to handle obstacle avoidance
 function [new_x, new_y, overtaking_start_idx, overtaking_end_idx] = obstacle_avoidance_with_early_detection(x_t, y_t, x2_t, y2_t, obstacle_x, obstacle_y)
