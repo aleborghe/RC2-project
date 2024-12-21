@@ -27,8 +27,8 @@ x2_t = spline(T, x_waypoint2, fine_t);           % Interpolate x(t) for overtaki
 y2_t = spline(T, y_waypoint2, fine_t);           % Interpolate y(t) for overtaking
 
 % Obstacle parameters
-obstacle_x = 554;
-obstacle_y = 115;
+obstacle_x = 250;
+obstacle_y = y_start;
 
 % Modify trajectory with obstacle avoidance
 [new_x, new_y, overtaking_start_idx, overtaking_end_idx] = obstacle_avoidance_with_early_detection(x_t, y_t, x2_t, y2_t, obstacle_x, obstacle_y);

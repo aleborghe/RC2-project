@@ -5,6 +5,7 @@ num_points = 500; % Number of points for smoothness
 x_start = 125;
 y_start = 60;
 
+
 % Generate NASCAR Circuit
 [x_waypoint, y_waypoint] = nascar_circuit(a, b, num_points, x_start, y_start);
 num_points = size(x_waypoint, 2);
