@@ -1,7 +1,13 @@
+DONE:
+1) implemeted all the controllers, both for regulation and for tracking
+2) obstacle avoidance, using sensor (offline implementation)
+3) parking
+
 TODO:
-1) obstacle detection (dynamic ?)
-2) parking detection
-3) parking phase: S shape is possible ? check
-4) overtaking
-5) pro version: obstacle is moving
+1) add sharp corners to test criticisms of some controllers
+2) test the performance of all controllers (traj+regul)
+3) test obstacle avoidance in different spots on the circuit
+4) full path for parking (possibile S shape ?)
+5) switching from simulink from traj tracking to parking phase
+6) PRO version: moving obstacle avoidance
 
