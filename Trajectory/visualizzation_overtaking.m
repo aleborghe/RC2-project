@@ -72,14 +72,14 @@ global_vertices(:, 2) = global_vertices(:, 2) + y_combined(1); % Posizione inizi
 unicycle = fill(global_vertices(:, 1), global_vertices(:, 2), 'r', 'EdgeColor', 'k'); % Visualizzazione del veicolo
 
 % Linea rossa di sorpasso (porzione trapezoidale)
-if ~isempty(overtaking_start_idx) && ~isempty(overtaking_end_idx)
-    % Calcola la porzione trapezoidale dei dati in anticipo (come il percorso blu)
-    red_x = new_x(overtaking_start_idx:overtaking_end_idx);
-    red_y = new_y(overtaking_start_idx:overtaking_end_idx);
-    
-    % Traccia il percorso di sorpasso in rosso (questo verrà mostrato immediatamente)
-    plot(red_x, red_y, 'r-', 'LineWidth', 2);
-end
+% if ~isempty(overtaking_start_idx) && ~isempty(overtaking_end_idx)
+%     % Calcola la porzione trapezoidale dei dati in anticipo (come il percorso blu)
+%     red_x = new_x(overtaking_start_idx:overtaking_end_idx);
+%     red_y = new_y(overtaking_start_idx:overtaking_end_idx);
+%     
+%     % Traccia il percorso di sorpasso in rosso (questo verrà mostrato immediatamente)
+%     plot(red_x, red_y, 'r-', 'LineWidth', 2);
+% end
 
 % Ciclo di animazione
 for i = 1:(length(x_combined)-1)

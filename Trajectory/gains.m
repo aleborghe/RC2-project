@@ -1,4 +1,4 @@
-controller = 2; %1 = feedback_zd, 2 = feedback_yd
+controller = 1; %1 = feedback_zd, 2 = feedback_yd
 
 switch controller
     case 1
