@@ -8,6 +8,5 @@ TODO:
 2) test the performance of all controllers (traj+regul)
 3) test obstacle avoidance in different spots on the circuit
 4) full path for parking (possibile S shape ?)
-5) switching from simulink from traj tracking to parking phase
 6) PRO version: moving obstacle avoidance
 
