@@ -1,5 +1,3 @@
-
-
 % Circuit Parameters
 a = 365;       % Length of straight sections
 b = 130;       % Width of straight sections
