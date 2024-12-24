@@ -1,17 +1,17 @@
 % Circuit Parameters
 a = 365;       % Length of straight sections
-b = 130;       % Width of straight sections
+b = 135;       % Width of straight sections
 num_points = 500; % Number of points for smoothness
 x_start = 125;
 y_start = 60;
 
 % Generate NASCAR Circuit
-[x_waypoint, y_waypoint] = nascar_circuit(a, b, num_points, x_start, y_start);
+[x_waypoint, y_waypoint] = nascar_circuit(a, b, num_points, x_start, y_start);  %square_circuit or nascar_circuit
 
 % Second lane circuit (used for overtaking)
 x_start2 = x_start;
 y_start2 = y_start - 35;
-[x_waypoint2, y_waypoint2] = nascar_circuit(a, b + 70, num_points, x_start2, y_start2);
+[x_waypoint2, y_waypoint2] = nascar_circuit(a, b + 70, num_points, x_start2, y_start2);  %square_circuit or nascar_circuit
 num_points = size(x_waypoint, 2);
 
 % Waypoints
@@ -40,6 +40,7 @@ hold on;
 
 % Plot the original path (blue)
 plot(x_t, y_t, 'b-', 'LineWidth', 2); 
+plot(x2_t, y2_t, 'r-', 'LineWidth', 2);
 
 % Plot the obstacle (green circle)
 h_obstacle = plot(obstacle_x,obstacle_y, 'go', 'MarkerSize', 20, 'MarkerFaceColor', 'g'); 
