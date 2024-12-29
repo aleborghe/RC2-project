@@ -1,5 +1,4 @@
 % Carica e visualizza l'immagine di sfondo
-bg = imread('background.jpg');
 figure;
 set(gcf, 'Position', [100, 100, 1000, 800]); % Imposta la dimensione della finestra
 

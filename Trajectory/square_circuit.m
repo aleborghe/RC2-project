@@ -1,4 +1,4 @@
-function [x, y] = square_circuit(a, b, num_points, x_start, y_start)
+function [x, x1, y, y1] = square_circuit(a, b, num_points, x_start, y_start)
 % nascar_circuit - Parametrizes a NASCAR-shaped circuit.
 %
 % Inputs:
@@ -42,10 +42,12 @@ function [x, y] = square_circuit(a, b, num_points, x_start, y_start)
     y_straight2 = (y_start+b)* ones(1, n_straight);
     
     % Combine all segments into a closed loop
-    x = [x_straight1(1:end-1), x_curve1, x_angle(2:end), x_straight2(2:end-1), x_curve2(1:end-1)];
-    y = [y_straight1(1:end-1), y_curve1, y_angle(2:end), y_straight2(2:end-1), y_curve2(1:end-1)];
+    x = [x_straight1(1:end-1), x_curve1, x_angle(2:end-1)];
+    x1 = [x_straight2(2:end-1), x_curve2(1:end-1)];
+    y = [y_straight1(1:end-1), y_curve1, y_angle(2:end-1)];
+    y1 = [y_straight2(2:end-1), y_curve2(1:end-1)];
     
     % Ensure closed loop
-    x(end+1) = x(1);
-    y(end+1) = y(1);
+    x1(end+1) = x(1);
+    y1(end+1) = y(1);
 end

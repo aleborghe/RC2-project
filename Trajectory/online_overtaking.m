@@ -5,28 +5,52 @@ num_points = 500; % Number of points for smoothness
 x_start = 125;
 y_start = 60;
 
-% Generate NASCAR Circuit
-[x_waypoint, y_waypoint] = square_circuit(a, b, num_points, x_start, y_start);  %square_circuit or nascar_circuit
-
 % Second lane circuit (used for overtaking)
 x_start2 = x_start;
 y_start2 = y_start - 35;
-[x_waypoint2, y_waypoint2] = square_circuit(a, b + 70, num_points, x_start2, y_start2);  %square_circuit or nascar_circuit
-num_points = size(x_waypoint, 2);
 
-% Waypoints
-T = linspace(0, 10, num_points); % Seconds
-fine_t = linspace(0, 10, num_points * 100);
+squared_corner = true;  %change to have a squared corner or round corner
 
-% Interpolation
-x_t = spline(T, x_waypoint, fine_t);             % Interpolate x(t)
-y_t = spline(T, y_waypoint, fine_t);             % Interpolate y(t)
-x2_t = spline(T, x_waypoint2, fine_t);           % Interpolate x(t) for overtaking
-y2_t = spline(T, y_waypoint2, fine_t);           % Interpolate y(t) for overtaking
+if squared_corner
+    bg = imread('background.jpg');
+    % Generate NASCAR Circuit
+    [x_waypoint, x1_waypoint, y_waypoint, y1_waypoint] = square_circuit(a, b, num_points, x_start, y_start);
+    % Second lane circuit (used for overtaking)
+    [x_waypoint2, x1_waypoint2, y_waypoint2, y1_waypoint2] = square_circuit(a, b + 70, num_points, x_start2, y_start2);
+    num_points1 = size(x_waypoint, 2);
+    num_points2 = size(x1_waypoint, 2);
+    % Waypoints
+    T = linspace(0, 10, num_points1+num_points2); % Seconds
+    T1 = T(1:num_points1);
+    T2 = T(num_points1+1:end);
+    fine_t = linspace(0, 10, (num_points1+num_points2)*100); % Seconds
+    fine_t1 = fine_t(1:num_points1*100);
+    fine_t2 = fine_t(num_points1*100+1:end);
+%     % Interpolation
+    x_t = [spline(T1, x_waypoint, fine_t1), spline(T2, x1_waypoint, fine_t2)];          % Interpolate x(t)
+    y_t = [spline(T1, y_waypoint, fine_t1), spline(T2, y1_waypoint, fine_t2)];             % Interpolate y(t)
+    x2_t = [spline(T1, x_waypoint2, fine_t1), spline(T2, x1_waypoint2, fine_t2)];           % Interpolate x(t) for overtaking
+    y2_t = [spline(T1, y_waypoint2, fine_t1), spline(T2, y1_waypoint2, fine_t2)];          % Interpolate y(t) for overtaking
+else
+    bg = imread('background2.jpg');
+    % Generate NASCAR Circuit
+    [x_waypoint, y_waypoint] = nascar_circuit(a, b, num_points, x_start, y_start);
+    % Second lane circuit (used for overtaking)
+    [x_waypoint2, y_waypoint2] = nascar_circuit(a, b + 70, num_points, x_start2, y_start2);
+    num_points = size(x_waypoint, 2);
+    % Waypoints
+    T = linspace(0, 10, num_points); % Seconds
+    fine_t = linspace(0, 10, num_points * 100);
+    % Interpolation
+    x_t = spline(T, x_waypoint, fine_t);             % Interpolate x(t)
+    y_t = spline(T, y_waypoint, fine_t);             % Interpolate y(t)
+    x2_t = spline(T, x_waypoint2, fine_t);           % Interpolate x(t) for overtaking
+    y2_t = spline(T, y_waypoint2, fine_t);           % Interpolate y(t) for overtaking
+end
 
 % Obstacle parameters
-obstacle_x = 290;
-obstacle_y = y_start+b;
+obstacle_x = x_start+a/2;
+obstacle_y = y_start;
 overtake_length = 800;
 
 overtake_trajectory = createOvertake(overtake_length);
