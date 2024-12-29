@@ -6,12 +6,12 @@ x_start = 125;
 y_start = 60;
 
 % Generate NASCAR Circuit
-[x_waypoint, y_waypoint] = nascar_circuit(a, b, num_points, x_start, y_start);  %square_circuit or nascar_circuit
+[x_waypoint, y_waypoint] = square_circuit(a, b, num_points, x_start, y_start);  %square_circuit or nascar_circuit
 
 % Second lane circuit (used for overtaking)
 x_start2 = x_start;
 y_start2 = y_start - 35;
-[x_waypoint2, y_waypoint2] = nascar_circuit(a, b + 70, num_points, x_start2, y_start2);  %square_circuit or nascar_circuit
+[x_waypoint2, y_waypoint2] = square_circuit(a, b + 70, num_points, x_start2, y_start2);  %square_circuit or nascar_circuit
 num_points = size(x_waypoint, 2);
 
 % Waypoints

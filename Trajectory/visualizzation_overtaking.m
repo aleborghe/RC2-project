@@ -37,6 +37,7 @@ theta = out.uni_state.signals.values(:, 3); % Orientamento (theta) (prima strutt
 % Dati dalla seconda struttura
 x1 = out.uni_state1.signals.values(:, 1); % Coordinate x (seconda struttura)
 y1 = out.uni_state1.signals.values(:, 2); % Coordinate y (seconda struttura)
+theta1 = out.uni_state1.signals.values(:, 3); % Orientamento (seconda struttura)
 
 % Interpolazione dei dati della seconda struttura per allinearsi ai passi temporali della prima struttura
 t1 = linspace(1, length(x), length(x)); % Passi temporali della prima struttura (1000 punti)
@@ -52,11 +53,12 @@ y = y(:); % Colonna
 theta = theta(:); % Colonna
 x1_interp = x1_interp(:); % Colonna
 y1_interp = y1_interp(:); % Colonna
+theta1 = theta1(:); % Colonna
 
 % Concatenamento dei dati (unendo il primo e il secondo percorso)
 x_combined = [x; x1_interp]; % Ora entrambi sono colonne (1000x1)
 y_combined = [y; y1_interp]; % Ora entrambi sono colonne (1000x1)
-theta_combined = [theta; theta(end) * ones(size(x1_interp))]; % Mantieni theta costante per la seconda parte
+theta_combined = [theta; theta1]; % Mantieni theta costante per la seconda parte
 
 % Rappresentazione triangolare del veicolo
 triangle_size = 20; % Dimensione del triangolo
