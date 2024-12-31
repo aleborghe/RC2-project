@@ -10,7 +10,7 @@ x_start2 = x_start;
 y_start2 = y_start - 35;
 
 squared_corner = true;  %change to have a squared corner or round corner
-obstacle = false;
+obstacle = true;
 
 if squared_corner
     bg = imread('background.jpg');
@@ -87,13 +87,22 @@ legend_entries = {'Trajectory', 'Obstacle'};
 % Display the legend
 legend(legend_entries);
 
-% Plot the parking lot (blue rectangle)
-parkX = 290;  
-parkY = 80;   
-width = 60;   
-height = 30;  
+% Draw the parking lot
+parkX = 250;  % Bottom-left X coordinate
+parkY = 80;   % Bottom-left Y coordinate
+width = 60;   % Width of the rectangle
+height = 30;  % Height of the rectangle
+
+% Draw the rectangle
 rectangle('Position', [parkX, parkY, width, height], 'FaceColor', 'blue', 'EdgeColor', 'black');
+
+% Add dividing lines for three vertical triangles
+line([parkX + width/3, parkX + width/3], [parkY, parkY + height], 'Color', 'white', 'LineWidth', 1.5);
+line([parkX + 2*width/3, parkX + 2*width/3], [parkY, parkY + height], 'Color', 'white', 'LineWidth', 1.5);
+
+% Add text at the center of the rectangle
 text(parkX + width/2, parkY + height/2, 'Parking Lot', 'Color', 'white', 'HorizontalAlignment', 'center');
+
 
 dt = mean(diff(fine_t));
 t_velocity = fine_t(1:end-1);
