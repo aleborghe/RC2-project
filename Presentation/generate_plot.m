@@ -1,46 +1,82 @@
-data1 = nom_direct_50ms;              %name of the file real
-data2 = out.scopeData1;             %Direct simulation
-data3 = nomin_50ms;                  %Emulation
-%data4 = rob_direct_50ms;
+
+x = out.uni_state.signals.values(:, 1); % Coordinate x (prima struttura)
+y = out.uni_state.signals.values(:, 2); % Coordinate y (prima struttura)
+theta = out.uni_state.signals.values(:, 3); % Orientamento (theta) (prima struttura)
+
+x1 = out.uni_state1.signals.values(:, 1); % Coordinate x (seconda struttura)
+y1 = out.uni_state1.signals.values(:, 2); % Coordinate y (seconda struttura)
+theta1 = out.uni_state1.signals.values(:, 3); % Orientamento (seconda struttura)
 
 indeces = (1:81);
 % Extract data from the file
-time = data1.time(indeces); % Extracting the first 501 values,change in accord to the plot time
-signals = data1.signals(2).values(indeces);
-ref = data1.signals(1).values(indeces); %reference
-signals2 = data2.signals(2).values(indeces);
-%signals3 = data3.signals(2).values(indeces);
-%signals4 = data4.signals(2).values(indeces);
+time1 = out.uni_state.time;
+time2 = out.uni_state1.time;
+
+ref_signals = reshape(permute(out.reference.signals.values, [3, 1, 2]), 1000, 3);
+
+x_ref = ref_signals(:, 1);
+y_ref = ref_signals(:, 2); %reference y 
+theta_ref = ref_signals(:, 3); %reference theta
 
 % Create the plot
 figure;
-stairs(time, signals, 'b');
+plot(time1, x_ref, 'b-')
 hold on;
-stairs(time, signals2, 'r');
-%stairs(time, signals3, 'g');
-%stairs(time, signals4, 'c');
-stairs(time, ref, 'm');
+plot(time1, x, 'r-')
+
 xlabel('Time [s]');
-ylabel('Motor hub angle [degrees]');
-h = legend("Result using real motor with direct design method", "Result using simulated motor"+ newline +"with direct design method", "Reference signal", "Position", [0.3244 0.7044 0.65 0.1956]);         % Add legend for clarity
-%"Result using real motor with emulation method"
+ylabel('X position [m]');
+legend("Reference x(t)", "x(t)");         % Add legend for clarity
 grid on;
 grid minor;
-hold off;
+%Small box with zoomed part
+axes('position',[.65 .25 .25 .25])         %Position of the box
+box on; % put box around new pair of axes
+indexOfInterest = (time1 >= 4.5) & (time1 <= 5.5); % range of time to zoom
+plot(time1(indexOfInterest), x_ref(indexOfInterest), 'b-');
+hold on
+plot(time1(indexOfInterest), x(indexOfInterest), 'r-');
+axis tight
+hold off
 
+
+figure;
+plot(time1, y_ref, 'b-')
+hold on;
+plot(time1, y, 'r-')
+
+xlabel('Time [s]');
+ylabel('Y position [m]');
+legend("Reference y(t)", "y(t)");         % Add legend for clarity
+grid on;
+grid minor;
+%Small box with zoomed part
+axes('position',[.65 .25 .25 .25])         %Position of the box
+box on; % put box around new pair of axes
+indexOfInterest = (time1 >= 4.5) & (time1 <= 5.5); % range of time to zoom
+plot(time1(indexOfInterest), y_ref(indexOfInterest), 'b-');
+hold on
+plot(time1(indexOfInterest), y(indexOfInterest), 'r-');
+axis tight
+hold off
+
+figure;
+plot(time1, theta_ref, 'b-')
+hold on;
+plot(time1, theta, 'r-')
+
+xlabel('Time [s]');
+ylabel('Theta position [rad]');
+legend("Reference theta(t)", "theta(t)");         % Add legend for clarity
+grid on;
+grid minor;
 
 %Small box with zoomed part
 axes('position',[.65 .25 .25 .25])         %Position of the box
-box on % put box around new pair of axes
-indexOfInterest = (time >= 0) & (time <= 1); % range of time to zoom
-%plot(time(indexOfInterest), signals(indexOfInterest), 'b', time(indexOfInterest), signals2(indexOfInterest), 'r', time(indexOfInterest), signals3(indexOfInterest), 'g', time(indexOfInterest), ref(indexOfInterest), 'm');
-stairs(time(indexOfInterest), signals(indexOfInterest), 'b')
-hold on;
-stairs(time(indexOfInterest), signals2(indexOfInterest), 'r');
-stairs(time(indexOfInterest), ref(indexOfInterest), 'm');
-%stairs(time(indexOfInterest), signals3(indexOfInterest), 'g');
-%stairs(time(indexOfInterest), signals4(indexOfInterest), 'c');
+box on; % put box around new pair of axes
+indexOfInterest = (time1 >= 4.5) & (time1 <= 5.5); % range of time to zoom
+plot(time1(indexOfInterest), theta_ref(indexOfInterest), 'b-');
+hold on
+plot(time1(indexOfInterest), theta(indexOfInterest), 'r-');
 axis tight
-grid on;
-grid minor;
 hold off;

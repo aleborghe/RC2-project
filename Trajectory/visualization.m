@@ -1,5 +1,4 @@
 % Load and display background image
-bg = imread('background.jpg');
 figure;
 imshow(bg);
 hold on;

@@ -10,6 +10,7 @@ x_start2 = x_start;
 y_start2 = y_start - 35;
 
 squared_corner = true;  %change to have a squared corner or round corner
+obstacle = false;
 
 if squared_corner
     bg = imread('background.jpg');
@@ -47,10 +48,15 @@ else
     x2_t = spline(T, x_waypoint2, fine_t);           % Interpolate x(t) for overtaking
     y2_t = spline(T, y_waypoint2, fine_t);           % Interpolate y(t) for overtaking
 end
-
 % Obstacle parameters
-obstacle_x = x_start+a/2;
-obstacle_y = y_start;
+if obstacle
+    obstacle_x = x_start+a/2;
+    obstacle_y = y_start;
+else
+    obstacle_x = 2000;              %Hides obstacle
+    obstacle_y = 2000;
+end
+
 overtake_length = 800;
 
 overtake_trajectory = createOvertake(overtake_length);
@@ -64,18 +70,19 @@ hold on;
 
 % Plot the original path (blue)
 plot(x_t, y_t, 'b-', 'LineWidth', 2); 
-plot(x2_t, y2_t, 'r-', 'LineWidth', 2);
+%plot(x2_t, y2_t, 'r-', 'LineWidth', 2);
 
 % Plot the obstacle (green circle)
-h_obstacle = plot(obstacle_x,obstacle_y, 'go', 'MarkerSize', 20, 'MarkerFaceColor', 'g'); 
-
+if obstacle
+    h_obstacle = plot(obstacle_x,obstacle_y, 'go', 'MarkerSize', 20, 'MarkerFaceColor', 'g'); 
+end
 % Labels and legend
 xlabel('x(t)');
 ylabel('y(t)');
 title('Smooth Continuous Path with Obstacle Avoidance');
 
 % Create legend only if the respective objects exist
-legend_entries = {'Original Path', 'Obstacle'};
+legend_entries = {'Trajectory', 'Obstacle'};
 
 % Display the legend
 legend(legend_entries);
