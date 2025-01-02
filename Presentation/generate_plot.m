@@ -79,4 +79,5 @@ plot(time1(indexOfInterest), theta_ref(indexOfInterest), 'b-');
 hold on
 plot(time1(indexOfInterest), theta(indexOfInterest), 'r-');
 axis tight
+ylim([1.2 3.3]); % Adjust y-axis limits for the zoomed-in plot
 hold off;
