@@ -121,7 +121,7 @@ overtake_data = overtake_trajectory;
 % Save to the root folder
 save('../ref_data.mat', 'ref_data');
 
-run("gains.m");
+%run("gains.m");
 
 function overtake_data = createOvertake(length)
     t = linspace(-7, 7, 3000); % Adjust range for smoothness

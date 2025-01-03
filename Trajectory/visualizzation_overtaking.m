@@ -104,7 +104,7 @@ fill(global_vertices_static2(:, 1), global_vertices_static2(:, 2), 'r', 'EdgeCol
 assert(length(x_combined) == length(theta_combined), 'x_combined and theta_combined must have the same length.');
 
 % Animation loop
-for i = 1:1%min(length(x_combined), length(theta_combined))-1
+for i = 1:min(length(x_combined), length(theta_combined))-1
     % Rotation matrix for the vehicle orientation
     R = [cos(theta_combined(i)), -sin(theta_combined(i)); sin(theta_combined(i)), cos(theta_combined(i))];
     
