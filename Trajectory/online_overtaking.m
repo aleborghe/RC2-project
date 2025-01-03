@@ -63,7 +63,6 @@ overtake_trajectory = createOvertake(overtake_length);
 
 
 % Background and visualization
-bg = imread('background.jpg');
 figure;
 imshow(bg);
 hold on;
@@ -124,9 +123,9 @@ save('../ref_data.mat', 'ref_data');
 
 run("gains.m");
 
-function overtake = createOvertake(length)
+function overtake_data = createOvertake(length)
     t = linspace(-7, 7, 3000); % Adjust range for smoothness
-    x1 = 1 ./ (1 + exp(-t));
-    x2 = exp(-t) ./ (1 + exp(-t));
-    overtake = [0, x1, x1(end)*ones(1,length), x2];
+    x1 = 1 ./ (1 + exp(-t)); %Positive sigmoid
+    x2 = exp(-t) ./ (1 + exp(-t)); %Negative sigmoid
+    overtake_data = [0, x1, x1(end)*ones(1,length), x2];
 end

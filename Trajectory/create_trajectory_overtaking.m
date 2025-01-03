@@ -48,7 +48,7 @@ else
 end
 
 % Obstacle parameters
-obstacle_x = 250;
+obstacle_x = x_start+a/2;
 obstacle_y = y_start;
 
 % Modify trajectory with obstacle avoidance
@@ -68,11 +68,11 @@ hold on;
 plot(x_t, y_t, 'b-', 'LineWidth', 2); 
 plot(x2_t, y2_t, 'r-', 'LineWidth', 2); 
 
-% Plot the overtaking path (only the trapezoidal portion in red)
-% if ~isempty(overtaking_start_idx)
-%     % Trapezoidal portion of the overtaking path (only the avoidance part)
-%     plot(new_x(overtaking_start_idx:overtaking_end_idx), new_y(overtaking_start_idx:overtaking_end_idx), 'r-', 'LineWidth', 2);
-% end
+%Plot the overtaking path (only the trapezoidal portion in red)
+if ~isempty(overtaking_start_idx)
+    % Trapezoidal portion of the overtaking path (only the avoidance part)
+    plot(new_x(overtaking_start_idx:overtaking_end_idx), new_y(overtaking_start_idx:overtaking_end_idx), 'r-', 'LineWidth', 2);
+end
 
 % Plot the obstacle (green circle)
 h_obstacle = plot(obstacle_x, obstacle_y, 'go', 'MarkerSize', 20, 'MarkerFaceColor', 'g'); 
