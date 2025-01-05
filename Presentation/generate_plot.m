@@ -9,10 +9,10 @@ y1 = out.uni_state1.signals.values(:, 2); % Coordinate y (second structure)
 theta1 = out.uni_state1.signals.values(:, 3); % Orientation (theta) (second structure)
 
 % Extract data
-time1 = out.uni_state1.time;
+time1 = out.uni_state.time;
 time2 = out.uni_state1.time;
 
-ref_signals = reshape(permute(out.reference.signals.values, [3, 1, 2]), 2501, 3);
+ref_signals = reshape(permute(out.reference.signals.values, [3, 1, 2]), 1000, 3);
 
 x_ref = ref_signals(:, 1);
 y_ref = ref_signals(:, 2); % Reference y
