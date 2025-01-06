@@ -12,7 +12,7 @@ theta1 = out.uni_state1.signals.values(:, 3); % Orientation (theta) (second stru
 time1 = out.uni_state.time;
 time2 = out.uni_state1.time;
 
-ref_signals = reshape(permute(out.reference.signals.values, [3, 1, 2]), 1000, 3);
+ref_signals = reshape(permute(out.reference.signals.values, [3, 1, 2]), 5000, 3);
 
 x_ref = ref_signals(:, 1);
 y_ref = ref_signals(:, 2); % Reference y
@@ -90,7 +90,7 @@ hold off;
 % Small box with zoomed part
 axes('position', [.58 .20 .30 .30]); % Position of the zoom box
 box on; % Put box around new pair of axes
-indexOfInterest = (time1 >= 4.8) & (time1 <= 5.3); % Range of time to zoom
+indexOfInterest = (time1 >= 4.9) & (time1 <= 5.1); % Range of time to zoom
 plot(time1(indexOfInterest), theta_ref(indexOfInterest), 'b-');
 hold on;
 plot(time1(indexOfInterest), theta(indexOfInterest), 'r-');
