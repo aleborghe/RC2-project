@@ -53,13 +53,13 @@ grid on;
 grid minor;
 
 % Small box with zoomed part
-axes('position', [.65 .45 .25 .25]); % Position of the zoom box
+axes('position', [.50 .25 .25 .25]); % Position of the zoom box
 box on; % Put box around new pair of axes
-indexOfInterest = (time1 >= 4.5) & (time1 <= 6); % Range of time to zoom
+indexOfInterest = (time1 >= 4.8) & (time1 <= 5.2); % Range of time to zoom
 plot(time1(indexOfInterest), y_ref(indexOfInterest), 'b-');
 hold on;
 plot(time1(indexOfInterest), y(indexOfInterest), 'r-');
-axis tight;
+xlim tight;
 grid on; % Ensure grid is on in zoomed area
 grid minor; % Minor grid lines in zoomed area
 hold off;
@@ -90,7 +90,7 @@ hold off;
 % Small box with zoomed part
 axes('position', [.58 .20 .30 .30]); % Position of the zoom box
 box on; % Put box around new pair of axes
-indexOfInterest = (time1 >= 4.92) & (time1 <= 5.1); % Range of time to zoom
+indexOfInterest = (time1 >= 4.8) & (time1 <= 5.3); % Range of time to zoom
 plot(time1(indexOfInterest), theta_ref(indexOfInterest), 'b-');
 hold on;
 plot(time1(indexOfInterest), theta(indexOfInterest), 'r-');
