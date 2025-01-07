@@ -98,3 +98,31 @@ xlim tight;
 grid on; % Ensure grid is on in zoomed area
 grid minor; % Minor grid lines in zoomed area
 hold off;
+
+%% omega
+
+w = out.omega.signals.values(:);
+timeomega = out.omega.time;
+
+% Create the plot for Theta
+figure;
+plot(time1, theta_ref, 'b-');
+hold on;
+plot(time1, theta, 'r-');
+xlabel('Time [s]');
+ylabel('Theta position [rad]');
+legend("Reference theta(t)", "theta(t)");         % Add legend for clarity
+grid on;
+grid minor;
+
+% Small box with zoomed part
+axes('position', [.58 .20 .30 .30]); % Position of the zoom box
+box on; % Put box around new pair of axes
+indexOfInterest = (timeomega >= 4.9) & (timeomega <= 5.1); % Range of time to zoom
+plot(timeomega(indexOfInterest), w(indexOfInterest), 'm-');
+hold on;
+xlim tight;
+legend("Omega [rad/s]"); 
+grid on; % Ensure grid is on in zoomed area
+grid minor; % Minor grid lines in zoomed area
+hold off;
