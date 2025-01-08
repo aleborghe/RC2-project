@@ -1,7 +1,7 @@
 % First structure
-x = out.uni_state2.signals.values(:, 1); % Coordinate x (first structure)
-y = out.uni_state2.signals.values(:, 2); % Coordinate y (first structure)
-theta = out.uni_state2.signals.values(:, 3); % Orientation (theta) (first structure)
+x = out.uni_state1.signals.values(:, 1); % Coordinate x (first structure)
+y = out.uni_state1.signals.values(:, 2); % Coordinate y (first structure)
+theta = out.uni_state1.signals.values(:, 3); % Orientation (theta) (first structure)
 
 % Second structure
 x1 = out.uni_state2.signals.values(:, 1); % Coordinate x (second structure)
@@ -9,10 +9,10 @@ y1 = out.uni_state2.signals.values(:, 2); % Coordinate y (second structure)
 theta1 = out.uni_state2.signals.values(:, 3); % Orientation (theta) (second structure)
 
 % Extract data
-time1 = out.uni_state2.time;
+time1 = out.uni_state1.time;
 time2 = out.uni_state2.time;
 
-ref_signals = reshape(permute(out.reference1.signals.values, [3, 1, 2]), 5001, 2);
+ref_signals = reshape(permute(out.reference1.signals.values, [3, 1, 2]), 500, 2);
 
 x_ref = ref_signals(:, 1);
 y_ref = ref_signals(:, 2); % Reference y
