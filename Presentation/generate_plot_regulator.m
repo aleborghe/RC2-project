@@ -3,20 +3,20 @@ x = out.uni_state1.signals.values(:, 1); % Coordinate x (first structure)
 y = out.uni_state1.signals.values(:, 2); % Coordinate y (first structure)
 theta = out.uni_state1.signals.values(:, 3); % Orientation (theta) (first structure)
 
-% Second structure
-x1 = out.uni_state2.signals.values(:, 1); % Coordinate x (second structure)
-y1 = out.uni_state2.signals.values(:, 2); % Coordinate y (second structure)
-theta1 = out.uni_state2.signals.values(:, 3); % Orientation (theta) (second structure)
+% % Second structure
+% x1 = out.uni_state2.signals.values(:, 1); % Coordinate x (second structure)
+% y1 = out.uni_state2.signals.values(:, 2); % Coordinate y (second structure)
+% theta1 = out.uni_state2.signals.values(:, 3); % Orientation (theta) (second structure)
 
 % Extract data
 time1 = out.uni_state1.time;
-time2 = out.uni_state2.time;
+%time2 = out.uni_state2.time;
 
-ref_signals = reshape(permute(out.reference1.signals.values, [3, 1, 2]), 500, 2);
+ref_signals = reshape(permute(out.reference1.signals.values, [3, 1, 2]), 1251, 3);
 
 x_ref = ref_signals(:, 1);
 y_ref = ref_signals(:, 2); % Reference y
-
+theta_ref = ref_signals(:, 3);
 
 % Create the plot for X
 figure;
@@ -52,21 +52,21 @@ legend("Reference y(t)", "y(t)");         % Add legend for clarity
 grid on;
 grid minor;
 
-% Small box with zoomed part
-axes('position', [.65 .45 .25 .25]); % Position of the zoom box
-box on; % Put box around new pair of axes
-indexOfInterest = (time1 >= 9.9) & (time1 <= 10.6); % Range of time to zoom
-plot(time1(indexOfInterest), y_ref(indexOfInterest), 'b-');
-hold on;
-plot(time1(indexOfInterest), y(indexOfInterest), 'r-');
-axis tight;
-grid on; % Ensure grid is on in zoomed area
-grid minor; % Minor grid lines in zoomed area
-hold off;
+% % Small box with zoomed part
+% axes('position', [.65 .45 .25 .25]); % Position of the zoom box
+% box on; % Put box around new pair of axes
+% indexOfInterest = (time1 >= 9.9) & (time1 <= 10.6); % Range of time to zoom
+% plot(time1(indexOfInterest), y_ref(indexOfInterest), 'b-');
+% hold on;
+% plot(time1(indexOfInterest), y(indexOfInterest), 'r-');
+% axis tight;
+% grid on; % Ensure grid is on in zoomed area
+% grid minor; % Minor grid lines in zoomed area
+% hold off;
 
 % Create the plot for Theta
 figure;
-% plot(time1, theta_ref, 'b-');
+plot(time1, theta_ref, 'b-');
 hold on;
 plot(time1, theta, 'r-');
 xlabel('Time [s]');
