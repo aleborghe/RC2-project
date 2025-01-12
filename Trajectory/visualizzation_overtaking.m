@@ -118,7 +118,7 @@ for i = 1:min(length(x_combined), length(theta_combined))-1
     
     % Real-time visualization of the vehicle's path
     drawnow;
-    pause(dt); % Adjust to match real-time simulation
+    pause(dt/2); % Adjust to match real-time simulation
 end
 
 % if obstacle
