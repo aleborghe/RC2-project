@@ -40,31 +40,23 @@ line([parkX + 2*width/3, parkX + 2*width/3], [parkY, parkY + height], 'Color', '
 %text(parkX + width/2, parkY + height/2, 'Parking Lot', 'Color', 'white', 'HorizontalAlignment', 'center');
 
 % Vehicle state from the first dataset (original path)
-x = out.uni_state.signals.values(:, 1); % x-coordinates (first dataset)
-y = out.uni_state.signals.values(:, 2); % y-coordinates (first dataset)
-theta = out.uni_state.signals.values(:, 3); % Orientation (theta) (first dataset)
+x = out.ScopeDATA.signals(1).values(:, 1); % x-coordinates (first dataset)
+y = out.ScopeDATA.signals(1).values(:, 2); % y-coordinates (first dataset)
+theta = out.ScopeDATA.signals(1).values(:, 3); % Orientation (theta) (first dataset)
 
 % Data from the second dataset
-x1 = out.uni_state1.signals.values(:, 1); % x-coordinates (second dataset)
-y1 = out.uni_state1.signals.values(:, 2); % y-coordinates (second dataset)
-theta1 = out.uni_state1.signals.values(:, 3); % Orientation (second dataset)
+x1 = out.ScopeData5.signals.values(:, 1); % x-coordinates (second dataset)
+y1 = out.ScopeData5.signals.values(:, 2); % y-coordinates (second dataset)
+theta1 = out.ScopeData5.signals.values(:, 3); % Orientation (second dataset)
 
 % Interpolate the second dataset to align with the time steps of the first dataset
 t1 = linspace(1, length(x), length(x)); % Time steps for the first dataset (1000 points)
 t2 = linspace(1, length(x1), length(x1)); % Time steps for the second dataset (501 points)
 
 % Interpolate the second dataset over the time steps of the first
-x1_interp = interp1(t2, x1, t1, 'linear', 'extrap');
-y1_interp = interp1(t2, y1, t1, 'linear', 'extrap');
-theta1_interp = interp1(t2, theta1, t1, 'linear', 'extrap'); % Interpolate theta1
-
-% Convert x, y, x1_interp, y1_interp into columns (1000x1)
-x = x(:); % Column
-y = y(:); % Column
-theta = theta(:); % Column
-x1_interp = x1_interp(:); % Column
-y1_interp = y1_interp(:); % Column
-theta1_interp = theta1_interp(:); % Column
+x1_interp = interp1(t2, x1, t1, 'linear', 'extrap')';
+y1_interp = interp1(t2, y1, t1, 'linear', 'extrap')';
+theta1_interp = interp1(t2, theta1, t1, 'linear', 'extrap')'; % Interpolate theta1
 
 % Concatenate the data (combining the first and second paths)
 x_combined = [x; x1_interp]; % Both are now columns (1000x1)
