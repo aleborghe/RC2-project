@@ -50,8 +50,8 @@ else
 end
 % Obstacle parameters
 if obstacle
-    obstacle_x = x_start+a/2;
-    obstacle_y = y_start;
+    obstacle_x = 535;
+    obstacle_y = 78;
 else
     obstacle_x = 2000;              %Hides obstacle
     obstacle_y = 2000;
